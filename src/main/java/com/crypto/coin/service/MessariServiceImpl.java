@@ -13,7 +13,9 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -35,7 +37,7 @@ public class MessariServiceImpl implements MessariService {
                 "        \"limit\": 10000,\n" +
                 "        \"tags\": []\n" +
                 "    },\n" +
-                "    \"query\": \"query ResearchCategoryArticles($limit: Int = 5, $tags: [String!] = [], $after: PaginationCursor) {\\n  articles(after: $after, first: $limit, where: {published: true, tags_in: $tags}) {\\n edges {\\n node {\\n  articleType\\n  id\\n    publishDate\\n slug\\n title\\n }\\n }\\n   pageInfo {\\n  hasNextPage\\n }\\n  }\\n}\\n\"\n" +
+                "    \"query\": \"query ResearchCategoryArticles($limit: Int = 5, $tags: [String!] = [], $after: PaginationCursor) {\\n  articles(after: $after, first: $limit, where: {published: true, tags_in: $tags}) {\\n edges {\\n node {\\n  articleType\\n  id\\n   content\\n  updateDate\\n publishDate\\n slug\\n title\\n }\\n }\\n   pageInfo {\\n  hasNextPage\\n }\\n  }\\n}\\n\"\n" +
                 "}";
         JsonElement b = new Gson().fromJson(a, JsonElement.class);
         return b.toString();
@@ -102,18 +104,29 @@ public class MessariServiceImpl implements MessariService {
                         ent.setSource("messari");
                         String srcId = getFieldStr(it1, "id");
                         ent.setSrcId(srcId);
+                        ent.setName(getFieldStr(it1, "title"));
                         ent.setArticleType(getFieldStr(it1, "articleType"));
                         String slug = getFieldStr(it1, "slug");
                         ent.setSlug(slug);
                         String link = "https://messari.io/article/" + slug;
                         ent.setLink(link);
+                        String date = getFieldStr(it1, "publishDate");
+                        if(date!=null){
+                            Date currentDate = new Date (Long.parseLong(date)*1000);
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+                            String dateStr = dateFormat.format(currentDate);
+                            ent.setDate(dateStr);
+                        }
 
-                        if (ids == null || (ids != null && ids.size() > 0 && ids.contains(srcId))) {
+                        ent.setMarkdown(getFieldStr(it1, "content"));
+
+                        if (ids == null || (ids != null && ids.size() > 0 && !ids.contains(srcId))) {
                             log.info("ADDED item " + slug);
                             ents.add(ent);
                         }
                     }
                 }
+                log.info("ADDED total " + ents.size());
             }
         }
 

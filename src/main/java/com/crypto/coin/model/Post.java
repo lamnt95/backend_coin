@@ -38,4 +38,7 @@ public class Post implements Serializable {
 
     @Column(name = "html")
     private String html;
+
+    @Column(name = "date")
+    private String date;
 }
