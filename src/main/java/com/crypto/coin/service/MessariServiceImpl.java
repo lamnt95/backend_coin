@@ -31,14 +31,7 @@ public class MessariServiceImpl implements MessariService {
     private String url = "https://graphql.messari.io/query";
 
     private String getBodyApiMessariList() {
-        String a = "{\n" +
-                "    \"operationName\": \"ResearchCategoryArticles\",\n" +
-                "    \"variables\": {\n" +
-                "        \"limit\": 10000,\n" +
-                "        \"tags\": []\n" +
-                "    },\n" +
-                "    \"query\": \"query ResearchCategoryArticles($limit: Int = 5, $tags: [String!] = [], $after: PaginationCursor) {\\n  articles(after: $after, first: $limit, where: {published: true, tags_in: $tags}) {\\n edges {\\n node {\\n  articleType\\n  id\\n   content\\n  updateDate\\n publishDate\\n slug\\n title\\n }\\n }\\n   pageInfo {\\n  hasNextPage\\n }\\n  }\\n}\\n\"\n" +
-                "}";
+        String a = "{\n" + "    \"operationName\": \"ResearchCategoryArticles\",\n" + "    \"variables\": {\n" + "        \"limit\": 10000,\n" + "        \"tags\": []\n" + "    },\n" + "    \"query\": \"query ResearchCategoryArticles($limit: Int = 5, $tags: [String!] = [], $after: PaginationCursor) {\\n  articles(after: $after, first: $limit, where: {published: true, tags_in: $tags}) {\\n edges {\\n node {\\n  articleType\\n  id\\n   content\\n  updateDate\\n publishDate\\n slug\\n title\\n }\\n }\\n   pageInfo {\\n  hasNextPage\\n }\\n  }\\n}\\n\"\n" + "}";
         JsonElement b = new Gson().fromJson(a, JsonElement.class);
         return b.toString();
     }
@@ -54,11 +47,7 @@ public class MessariServiceImpl implements MessariService {
     }
 
     private String getBodyApiMessariDetail(String slug) {
-        String a1 = "{\n" +
-                "  \"operationName\":\"ResearchArticleBySlug\",\n" +
-                "  \"variables\":{\"slug\":\"the-evolution-sushiswap-to-sushi-com\"},\n" +
-                "  \"query\":\"query ResearchArticleBySlug($slug: String!) {\\n  articleBySlug(slug: $slug) {\\n    articleType\\n    assets {\\n symbol\\n }\\n categoryTags\\n    content\\n id\\n    publishDate\\n    slug\\n    title\\n    updateDate\\n }\\n}\\n\"\n" +
-                "}";
+        String a1 = "{\n" + "  \"operationName\":\"ResearchArticleBySlug\",\n" + "  \"variables\":{\"slug\":\"the-evolution-sushiswap-to-sushi-com\"},\n" + "  \"query\":\"query ResearchArticleBySlug($slug: String!) {\\n  articleBySlug(slug: $slug) {\\n    articleType\\n    assets {\\n symbol\\n }\\n categoryTags\\n    content\\n id\\n    publishDate\\n    slug\\n    title\\n    updateDate\\n }\\n}\\n\"\n" + "}";
         JsonElement b1 = new Gson().fromJson(a1, JsonElement.class);
         JsonElement c1 = b1.getAsJsonObject().get("variables");
         c1.getAsJsonObject().addProperty("slug", slug);
@@ -111,8 +100,8 @@ public class MessariServiceImpl implements MessariService {
                         String link = "https://messari.io/article/" + slug;
                         ent.setLink(link);
                         String date = getFieldStr(it1, "publishDate");
-                        if(date!=null){
-                            Date currentDate = new Date (Long.parseLong(date)*1000);
+                        if (date != null) {
+                            Date currentDate = new Date(Long.parseLong(date) * 1000);
                             SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
                             String dateStr = dateFormat.format(currentDate);
                             ent.setDate(dateStr);
@@ -120,7 +109,7 @@ public class MessariServiceImpl implements MessariService {
 
                         ent.setMarkdown(getFieldStr(it1, "content"));
 
-                        if (ids == null || (ids != null && ids.size() > 0 && !ids.contains(srcId))) {
+                        if (ids == null || (ids != null && ids.size() == 0) || (ids != null && ids.size() > 0 && !ids.contains(srcId))) {
                             log.info("ADDED item " + slug);
                             ents.add(ent);
                         }
