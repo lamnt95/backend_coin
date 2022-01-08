@@ -30,8 +30,8 @@ public class MessariServiceImpl implements MessariService {
 
     private String url = "https://graphql.messari.io/query";
 
-    private String getBodyApiMessariList() {
-        String a = "{\n" + "    \"operationName\": \"ResearchCategoryArticles\",\n" + "    \"variables\": {\n" + "        \"limit\": 10000,\n" + "        \"tags\": []\n" + "    },\n" + "    \"query\": \"query ResearchCategoryArticles($limit: Int = 5, $tags: [String!] = [], $after: PaginationCursor) {\\n  articles(after: $after, first: $limit, where: {published: true, tags_in: $tags}) {\\n edges {\\n node {\\n  articleType\\n  id\\n   content\\n  updateDate\\n publishDate\\n slug\\n title\\n }\\n }\\n   pageInfo {\\n  hasNextPage\\n }\\n  }\\n}\\n\"\n" + "}";
+    private String getBodyApiMessariList(Long limit) {
+        String a = "{\n" + "    \"operationName\": \"ResearchCategoryArticles\",\n" + "    \"variables\": {\n" + "        \"limit\": " + limit + ",\n" + "        \"tags\": []\n" + "    },\n" + "    \"query\": \"query ResearchCategoryArticles($limit: Int = 5, $tags: [String!] = [], $after: PaginationCursor) {\\n  articles(after: $after, first: $limit, where: {published: true, tags_in: $tags}) {\\n edges {\\n node {\\n  articleType\\n  id\\n   content\\n  updateDate\\n publishDate\\n slug\\n title\\n }\\n }\\n   pageInfo {\\n  hasNextPage\\n }\\n  }\\n}\\n\"\n" + "}";
         JsonElement b = new Gson().fromJson(a, JsonElement.class);
         return b.toString();
     }
@@ -70,13 +70,12 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
-    @Transactional
-    public void fetch() throws IOException {
+    public void fetch(Long limit) throws IOException {
         List<Post> ents = new ArrayList<>();
 
-        List<Long> ids = postRepo.getListIdMessari();
+        List<String> ids = postRepo.getListIdMessari();
 
-        String body1 = getBodyApiMessariList();
+        String body1 = getBodyApiMessariList(limit);
 
         log.info("START api list");
         Response res = thirdPartyAPI.postWithoutToken(url, body1, null, null);
@@ -86,7 +85,9 @@ public class MessariServiceImpl implements MessariService {
             log.info("SUCCESS");
             List<JsonElement> resJson = getResApiMessariList(res);
             if (resJson != null && resJson.size() > 0) {
+                Long index = 0l;
                 for (JsonElement it : resJson) {
+                    index += 1l;
                     JsonElement it1 = getFieldJson(it, "node");
                     if (it1 != null) {
                         Post ent = new Post();
@@ -110,7 +111,7 @@ public class MessariServiceImpl implements MessariService {
                         ent.setMarkdown(getFieldStr(it1, "content"));
 
                         if (ids == null || (ids != null && ids.size() == 0) || (ids != null && ids.size() > 0 && !ids.contains(srcId))) {
-                            log.info("ADDED item " + slug);
+//                            log.info("ADDED item " + slug);
                             ents.add(ent);
                         }
                     }
@@ -120,23 +121,21 @@ public class MessariServiceImpl implements MessariService {
         }
 
         if (ents.size() > 0) {
-            Long index = 1l;
+            Long i = 0l;
             for (Post ent : ents) {
-                String slug = ent.getSlug();
-                if (slug != null) {
-                    String body = getBodyApiMessariDetail(slug);
-                    log.info("START api detail " + slug + " - " + index);
-                    Response res2 = thirdPartyAPI.postWithoutToken(url, body, null, null);
-                    int stt2 = res2.code();
-                    if (stt2 >= 200 && stt2 <= 300) {
-                        JsonElement dt = getResApiMessariDetail(res2);
-                        String md = getFieldStr(dt, "content");
-                        ent.setMarkdown(md);
-                        log.info("SUCCESS");
-                    }
+                log.info(i.toString());
+                try{
+                    postRepo.saveAndFlush(ent);
+                }catch (Exception e) {
+                    log.info("ERR");
                 }
+                i += 1;
             }
-            postRepo.saveAll(ents);
         }
+    }
+
+    @Override
+    public List<Post> getAll() {
+        return postRepo.findAll();
     }
 }
