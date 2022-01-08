@@ -108,8 +108,6 @@ public class MessariServiceImpl implements MessariService {
                             ent.setDate(dateStr);
                         }
 
-                        ent.setMarkdown(getFieldStr(it1, "content"));
-
                         if (ids == null || (ids != null && ids.size() == 0) || (ids != null && ids.size() > 0 && !ids.contains(srcId))) {
 //                            log.info("ADDED item " + slug);
                             ents.add(ent);
@@ -121,15 +119,26 @@ public class MessariServiceImpl implements MessariService {
         }
 
         if (ents.size() > 0) {
-            Long i = 0l;
+            Long index = 1l;
             for (Post ent : ents) {
-                log.info(i.toString());
-                try{
-                    postRepo.saveAndFlush(ent);
-                }catch (Exception e) {
-                    log.info("ERR");
+                String slug = ent.getSlug();
+                if (slug != null) {
+                    String body = getBodyApiMessariDetail(slug);
+                    log.info("START api detail " + slug + " - " + index);
+                    Response res2 = thirdPartyAPI.postWithoutToken(url, body, null, null);
+                    int stt2 = res2.code();
+                    if (stt2 >= 200 && stt2 <= 300) {
+                        JsonElement dt = getResApiMessariDetail(res2);
+                        String md = getFieldStr(dt, "content");
+                        ent.setMarkdown(md);
+                        index += 1;
+                        try {
+                            postRepo.saveAndFlush(ent);
+                        } catch (Exception e) {
+                            log.info("ERR");
+                        }
+                    }
                 }
-                i += 1;
             }
         }
     }
