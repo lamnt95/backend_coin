@@ -102,10 +102,10 @@ public class MessariServiceImpl implements MessariService {
                         ent.setLink(link);
                         String date = getFieldStr(it1, "publishDate");
                         if (date != null) {
-                            Date currentDate = new Date(Long.parseLong(date) * 1000);
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-                            String dateStr = dateFormat.format(currentDate);
-                            ent.setDate(dateStr);
+//                            Date currentDate = new Date(Long.parseLong(date) * 1000);
+//                            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+//                            String dateStr = dateFormat.format(currentDate);
+                            ent.setDate(date);
                         }
 
                         if (ids == null || (ids != null && ids.size() == 0) || (ids != null && ids.size() > 0 && !ids.contains(srcId))) {
