@@ -9,4 +9,6 @@ public interface MessariService {
     public void fetch(Long limit) throws IOException;
 
     public List<Post> getAll();
+    
+    public String getAllStr();
 }
