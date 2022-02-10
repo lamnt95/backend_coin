@@ -1,7 +1,7 @@
 # backend_coin
 
-# 34.121.196.130:7000/post/getAll
+# https://java-crypto.herokuapp.com/post/getAll
 
-# 34.121.196.130:7000/post/fetchMessari?limit=10000
+# https://java-crypto.herokuapp.com/post/fetchMessari?limit=10000
 
 #11
