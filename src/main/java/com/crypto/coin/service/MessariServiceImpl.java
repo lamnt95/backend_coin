@@ -18,10 +18,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-
 @Slf4j
 @Service
 public class MessariServiceImpl implements MessariService {
@@ -156,8 +152,8 @@ public class MessariServiceImpl implements MessariService {
     @Override
     public String getAllStr() {
         List<Post> ps =  postRepo.findAll();
-        ObjectMapper mapper = new ObjectMapper().configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        String str = mapper.writeValueAsString(ps);
-        return str;
+        Gson gson = new Gson();
+        String json = gson.toJson(ps);
+        return json;
     }
 }
