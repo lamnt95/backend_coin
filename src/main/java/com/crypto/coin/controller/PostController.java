@@ -40,7 +40,7 @@ public class PostController {
     
     @GetMapping(value = "/getAllStr", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    private String getAll(
+    private String getAllStr(
     ) throws IOException {
         return messariService.getAllStr();
     }
