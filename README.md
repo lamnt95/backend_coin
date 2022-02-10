@@ -2,6 +2,6 @@
 
 # 34.121.196.130:7000/post/getAll
 
-# 34.121.196.130:7000/post/fetchMessari
+# 34.121.196.130:7000/post/fetchMessari?limit=10000
 
 #11
