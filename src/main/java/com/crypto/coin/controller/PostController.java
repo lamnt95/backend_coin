@@ -37,5 +37,12 @@ public class PostController {
     ) throws IOException {
         return messariService.getAll();
     }
+    
+    @GetMapping(value = "/getAllStr", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private String getAll(
+    ) throws IOException {
+        return messariService.getAllStr();
+    }
 
 }
