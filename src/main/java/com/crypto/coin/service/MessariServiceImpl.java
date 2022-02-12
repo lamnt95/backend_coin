@@ -47,7 +47,7 @@ public class MessariServiceImpl implements MessariService {
     }
 
     private String getBodyApiMessariDetail(String slug) {
-        String a1 = "{\n" + "  \"operationName\":\"ResearchArticleBySlug\",\n" + "  \"variables\":{\"slug\":\"the-evolution-sushiswap-to-sushi-com\"},\n" + "  \"query\":\"query ResearchArticleBySlug($slug: String!) {\\n  articleBySlug(slug: $slug) {\\n    articleType\\n    assets {\\n symbol\\n }\\n categoryTags\\n    content\\n id\\n    publishDate\\n    slug\\n    title\\n    updateDate\\n }\\n}\\n\"\n" + "}";
+        String a1 = "{\n" + "  \"operationName\":\"ResearchArticleBySlug\",\n" + "  \"variables\":{\"slug\":\"the-evolution-sushiswap-to-sushi-com\"},\n" + "  \"query\":\"query ResearchArticleBySlug($slug: String!) {\\n  articleBySlug(slug: $slug) {\\n    articleType\\n    assets {\\n symbol\\n }\\n content\\n id\\n    publishDate\\n    slug\\n    title\\n    updateDate\\n }\\n}\\n\"\n" + "}";
         JsonElement b1 = new Gson().fromJson(a1, JsonElement.class);
         JsonElement c1 = b1.getAsJsonObject().get("variables");
         c1.getAsJsonObject().addProperty("slug", slug);
