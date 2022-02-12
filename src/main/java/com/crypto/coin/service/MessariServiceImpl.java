@@ -128,18 +128,23 @@ public class MessariServiceImpl implements MessariService {
                     Response res2 = thirdPartyAPI.postWithoutToken(url, body, null, null);
                     int stt2 = res2.code();
                     if (stt2 >= 200 && stt2 <= 300) {
+                        log.info("Call api SUCCESS");
                         JsonElement dt = getResApiMessariDetail(res2);
                         String md = getFieldStr(dt, "content");
                         ent.setMarkdown(md);
                         index += 1;
                         try {
                             postRepo.saveAndFlush(ent);
+                            log.info("Insert DB SUCCESS");
                         } catch (Exception e) {
                             log.info("ERR");
                         }
+                    }else{
+                        log.info("Call api ERROR");
                     }
                 }
             }
+            log.info("the end");
         }
     }
 
