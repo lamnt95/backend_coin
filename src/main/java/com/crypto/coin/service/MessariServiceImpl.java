@@ -164,7 +164,14 @@ public class MessariServiceImpl implements MessariService {
     
     @Override
     public String getCache() {
-        String res = "";
-        return res;
+        String urlredis = "https://express-simple-hqn6en--3010.local.webcontainer.io/getCache";
+        Response res2 = thirdPartyAPI.getWithoutToken(urlredis, body, null, null);
+        int stt2 = res2.code();
+        if (stt2 >= 200 && stt2 <= 300) {
+            log.info(stt2);
+            log.info(res2.body().toString());
+            return res2.body().toString();
+        }
+        return null;
     }
 }
