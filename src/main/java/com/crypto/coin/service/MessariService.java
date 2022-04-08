@@ -1,6 +1,7 @@
 package com.crypto.coin.service;
 
 import com.crypto.coin.model.Post;
+import com.crypto.coin.model.AggreCache;
 
 import java.io.IOException;
 import java.util.List;
