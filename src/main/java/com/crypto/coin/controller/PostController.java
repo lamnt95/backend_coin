@@ -49,18 +49,7 @@ public class PostController {
     @ResponseBody
     private String getCache(
     ) throws IOException {
-	log.info("start");
-        JedisPool pool = new JedisPool(new JedisPoolConfig(),
-				"redis-18234.c1.asia-nortosystem1-1.gce.cloud.redislabs.com",
-				18234,
-				Protocol.DEFAULT_TIMEOUT,
-				"P5U9yQGw1mfJzDNowyT850v447bjTf1f");
-		Jedis jedis = pool.getResource();
-	    
-	log.info("end");
-        log.info(jedis.info());
-	log.info(jedis.get("cache"));
-        return jedis.get("cache");
+	return messariService.getCache();
     }
     
     @GetMapping(value = "/getAllStr", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
