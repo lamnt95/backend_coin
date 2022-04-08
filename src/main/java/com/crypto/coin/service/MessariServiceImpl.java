@@ -182,7 +182,7 @@ public class MessariServiceImpl implements MessariService {
     @Override
     public AggreCache setCache() throws IOException{
         String cache = getAllStr();
-        List<AggreCache> cacheExist = aggreCacheRepository.findOne();
+        List<AggreCache> cacheExist = aggreCacheRepository.getCache();
         if(cacheExist != null){
             AggreCache it = cacheExist.get(0);
             it.setData(cache);
