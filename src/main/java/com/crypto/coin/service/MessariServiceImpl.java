@@ -1,7 +1,11 @@
 package com.crypto.coin.service;
 
 import com.crypto.coin.model.Post;
+import com.crypto.coin.model.AggreCache;
+
 import com.crypto.coin.repository.PostRepo;
+import com.crypto.coin.repository.AggreCacheRepository;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
@@ -24,6 +28,9 @@ public class MessariServiceImpl implements MessariService {
 
     @Autowired
     private PostRepo postRepo;
+    
+    @Autowired
+    private AggreCacheRepository aggreCacheRepository;
 
     @Autowired
     private ThirdPartyAPI thirdPartyAPI;
@@ -163,8 +170,24 @@ public class MessariServiceImpl implements MessariService {
     }
     
     @Override
-    public String getCache() throws IOException{
-        
-        return "cache";
+    public AggreCache getCache() throws IOException{
+        AggreCache cacheExist = aggreCacheRepository.findOne();
+        return cacheExist;
+    }
+    
+    @Override
+    public AggreCache setCache() throws IOException{
+        String cache = getAllStr();
+        AggreCache cacheExist = aggreCacheRepository.findOne();
+        if(cacheExist != null){
+            cacheExist.setData(cache);
+            aggreCacheRepository.save(cacheExist);
+            return cacheExist;
+        }else{
+            AggreCache newCache = new AggreCache();
+            newCache.setData(cache);
+            AggreCache newCached = aggreCacheRepository.save(newCache);
+            return newCached;
+        } 
     }
 }
