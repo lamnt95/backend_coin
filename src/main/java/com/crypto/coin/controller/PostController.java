@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
-import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Jedis;
 
 @RestController
 @CrossOrigin("*")
