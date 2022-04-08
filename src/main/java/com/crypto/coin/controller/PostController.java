@@ -11,7 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
-
+import java.util.HashMap;
+import java.util.Map;
 import java.io.IOException;
 import java.util.List;
 
@@ -47,9 +48,12 @@ public class PostController {
     
     @GetMapping(value = "/getCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    private String getCache(
+    private Map<String, String> getCache(
     ) throws IOException {
-	return messariService.getCache();
+	Map<String, String> res = new HashMap();
+	String cache = messariService.getCache();
+	res.set("cache", cache):
+	return res;
     }
     
     @GetMapping(value = "/getAllStr", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
