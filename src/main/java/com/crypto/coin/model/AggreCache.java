@@ -10,7 +10,7 @@ public class AggreCache {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "data")
     private String data;
