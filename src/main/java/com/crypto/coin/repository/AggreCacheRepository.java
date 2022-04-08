@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface AggreCacheRepository extends JpaRepository<AggreCache, Long> {
-  @Query("from AggreCache c")
+  @Query("select c from AggreCache c")
   List<AggreCache> getCache();
 }
