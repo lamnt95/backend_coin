@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 @Repository
-public interface AggreCacheRepository extends JpaRepository<AggreCache, Long> {
+public interface AggreCacheRepository extends JpaRepository<AggreCache, Integer> {
   @Query("select c from AggreCache c")
   List<AggreCache> getCache();
 }
