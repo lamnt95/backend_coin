@@ -15,6 +15,6 @@ public interface MessariService {
     
     public AggreCache getCache() throws IOException;
     
-    public AggreCache setCache();
+    public AggreCache setCache() throws IOException;
 
 }
