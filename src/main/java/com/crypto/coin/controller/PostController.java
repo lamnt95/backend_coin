@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import redis.clients.jedis.JedisPool;
 
 @RestController
 @CrossOrigin("*")
@@ -36,6 +37,14 @@ public class PostController {
     private List<Post> getAll(
     ) throws IOException {
         return messariService.getAll();
+    }
+    
+    @GetMapping(value = "/getCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private String getCache(
+    ) throws IOException {
+        Jedis jedis = new Jedis();
+        return jedis.get("cache");
     }
     
     @GetMapping(value = "/getAllStr", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
