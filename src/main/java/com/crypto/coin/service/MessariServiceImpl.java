@@ -170,6 +170,8 @@ public class MessariServiceImpl implements MessariService {
         int stt2 = res2.code();
         if (stt2 >= 200 && stt2 <= 300) {
             log.info("success");
+            log.info(res2);
+            log.info(res2.body());
             log.info(res2.body().string());
             return res2.body().string();
         }
