@@ -52,7 +52,7 @@ public class PostController {
     ) throws IOException {
 	Map<String, String> res = new HashMap();
 	String cache = messariService.getCache();
-	res.set("cache", cache):
+	res.set("cache", cache);
 	return res;
     }
     
