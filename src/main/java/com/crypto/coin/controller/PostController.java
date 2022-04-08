@@ -50,6 +50,10 @@ public class PostController {
     @ResponseBody
     private Map<String, String> getCache (
     ) throws IOException {
+	    
+	Jedis jedis = new Jedis();
+	log.info(jedis.get("cache"));
+	    
 	Map<String, String> res = new HashMap();
 	String cache = messariService.getCache();
 	res.put("cache", cache);
