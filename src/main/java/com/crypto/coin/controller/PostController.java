@@ -47,6 +47,21 @@ public class PostController {
     ) throws IOException {
         return messariService.getAll();
     }
+
+    @GetMapping(value = "/getOne", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private Post getOne(
+            @RequestParam(name = "id") Integer id
+    ) throws IOException {
+        return messariService.getOne(id);
+    }
+
+    @GetMapping(value = "/getAll2", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private List<Post> getAll2(
+    ) throws IOException {
+        return messariService.getAll2();
+    }
     
     @GetMapping(value = "/getCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody

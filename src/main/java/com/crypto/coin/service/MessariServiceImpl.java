@@ -157,8 +157,19 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
+    public Post getOne(Integer id) {
+        return postRepo.getOne(id);
+    }
+
+    @Override
     public List<Post> getAll() {
         List<Post> ps =  postRepo.findAll();
+        return ps;
+    }
+
+    @Override
+    public List<Post> getAll2() {
+        List<Post> ps =  postRepo.getAll2();
         return ps;
     }
     

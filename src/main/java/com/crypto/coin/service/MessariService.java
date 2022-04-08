@@ -9,8 +9,12 @@ import java.util.List;
 public interface MessariService {
     public void fetch(Long limit) throws IOException;
 
+    public Post getOne(Integer id);
+
     public List<Post> getAll();
-    
+
+    public List<Post> getAll2();
+
     public String getAllStr();
     
     public AggreCache getCache() throws IOException;

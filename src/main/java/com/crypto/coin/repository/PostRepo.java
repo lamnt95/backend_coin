@@ -14,4 +14,10 @@ public interface PostRepo extends JpaRepository<Post, Long> {
 
     @Query("select a.srcId from Post a where a.source like 'messari'")
     List<String> getListIdMessari();
+
+    @Query("select a from Post a where a.id = ?1")
+    Post getOne(Integer id);
+
+    @Query("select new com.crypto.coin.model.Post(a.id, a.name, a.source, a.articleType, a.slug, a.srcId, a.link, a.date) from Post a ")
+    List<Post> getAll2();
 }

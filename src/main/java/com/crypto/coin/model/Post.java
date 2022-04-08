@@ -1,6 +1,8 @@
 package com.crypto.coin.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +10,8 @@ import java.io.Serializable;
 @Data
 @Entity()
 @Table(name = "post")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -41,4 +45,15 @@ public class Post implements Serializable {
 
     @Column(name = "date")
     private String date;
+
+    public Post(Integer id, String name, String source, String articleType, String slug, String srcId, String link, String date) {
+        this.id = id;
+        this.name = name;
+        this.source = source;
+        this.articleType = articleType;
+        this.slug = slug;
+        this.srcId = srcId;
+        this.link = link;
+        this.date = date;
+    }
 }
