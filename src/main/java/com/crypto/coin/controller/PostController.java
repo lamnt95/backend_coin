@@ -48,16 +48,16 @@ public class PostController {
     
     @GetMapping(value = "/getCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    private Map<String, String> getCache (
+    private AggreCache getCache (
     ) throws IOException {
-	    
-// 	Jedis jedis = new Jedis();
-// 	log.info(jedis.get("cache"));
-	    
-	Map<String, String> res = new HashMap();
-	String cache = messariService.getCache();
-	res.put("cache", cache);
-	return res;
+	return messariService.getCache();
+    }
+	
+    @GetMapping(value = "/setCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private AggreCache setCache (
+    ) throws IOException {
+	return messariService.setCache();
     }
     
     @GetMapping(value = "/getAllStr", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
