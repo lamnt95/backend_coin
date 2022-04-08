@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Data
 @Entity()
 @Table(name = "aggre_cache")
-public class AggreCache {
+public class AggreCache implements Serializable  {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
