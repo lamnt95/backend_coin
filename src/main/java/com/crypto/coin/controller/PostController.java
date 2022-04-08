@@ -14,7 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.List;
+
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.Protocol;
 
 @Slf4j
 @RestController
@@ -46,7 +50,13 @@ public class PostController {
     private String getCache(
     ) throws IOException {
 	log.info("start");
-        Jedis jedis = new Jedis();
+        JedisPool pool = new JedisPool(new JedisPoolConfig(),
+				"redis-18234.c1.asia-nortosystem1-1.gce.cloud.redislabs.com",
+				18234,
+				Protocol.DEFAULT_TIMEOUT,
+				"P5U9yQGw1mfJzDNowyT850v447bjTf1f");
+		Jedis jedis = pool.getResource();
+	    
 	log.info("end");
         log.info(jedis.info());
 	log.info(jedis.get("cache"));
