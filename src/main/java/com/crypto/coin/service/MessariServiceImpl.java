@@ -173,7 +173,7 @@ public class MessariServiceImpl implements MessariService {
     @Override
     public AggreCache getCache() throws IOException{
         List<AggreCache> cacheExist = aggreCacheRepository.getCache();
-        if(cacheExist!=null){
+        if(cacheExist!=null && cacheExist.size() > 0){
             return cacheExist.get(0);
         }
         return null;
@@ -183,7 +183,7 @@ public class MessariServiceImpl implements MessariService {
     public AggreCache setCache() throws IOException{
         String cache = getAllStr();
         List<AggreCache> cacheExist = aggreCacheRepository.getCache();
-        if(cacheExist != null){
+        if(cacheExist != null && cacheExist.size() > 0){
             AggreCache it = cacheExist.get(0);
             it.setData(cache);
             aggreCacheRepository.save(it);
