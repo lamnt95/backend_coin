@@ -5,7 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Entity(name = "aggre_cache")
+@Entity()
+@Table(name = "aggre_cache")
 public class AggreCache {
 
     @Id
