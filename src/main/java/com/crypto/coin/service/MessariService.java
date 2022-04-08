@@ -11,4 +11,7 @@ public interface MessariService {
     public List<Post> getAll();
     
     public String getAllStr();
+    
+    public String getCache();
+
 }
