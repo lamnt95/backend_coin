@@ -45,9 +45,11 @@ public class PostController {
     @ResponseBody
     private String getCache(
     ) throws IOException {
+	log.info("start");
         Jedis jedis = new Jedis();
+	log.info("end");
         log.info(jedis.info());
-		log.info(jedis.get("cache"));
+	log.info(jedis.get("cache"));
         return jedis.get("cache");
     }
     
