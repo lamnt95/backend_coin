@@ -165,6 +165,6 @@ public class MessariServiceImpl implements MessariService {
     @Override
     public String getCache() throws IOException{
         
-        return "cache;
+        return "cache";
     }
 }
