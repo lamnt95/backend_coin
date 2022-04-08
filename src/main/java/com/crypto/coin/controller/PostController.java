@@ -10,11 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.List;
 import redis.clients.jedis.Jedis;
 
+@Slf4j
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/post")
@@ -44,6 +46,8 @@ public class PostController {
     private String getCache(
     ) throws IOException {
         Jedis jedis = new Jedis();
+        log.info(jedis.info());
+		log.info(jedis.get("cache"));
         return jedis.get("cache");
     }
     
