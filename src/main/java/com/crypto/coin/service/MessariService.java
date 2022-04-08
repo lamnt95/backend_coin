@@ -13,5 +13,7 @@ public interface MessariService {
     public String getAllStr();
     
     public String getCache() throws IOException;
+    
+    public void setCache();
 
 }
