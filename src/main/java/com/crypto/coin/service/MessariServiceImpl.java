@@ -161,4 +161,10 @@ public class MessariServiceImpl implements MessariService {
         String json = gson.toJson(ps);
         return json;
     }
+    
+    @Override
+    public String getCache() {
+        String res = "";
+        return res;
+    }
 }
