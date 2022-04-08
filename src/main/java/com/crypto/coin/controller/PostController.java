@@ -48,7 +48,7 @@ public class PostController {
     
     @GetMapping(value = "/getCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    private Map<String, String> getCache(
+    private Map<String, String> getCache (
     ) throws IOException {
 	Map<String, String> res = new HashMap();
 	String cache = messariService.getCache();
