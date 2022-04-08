@@ -12,6 +12,6 @@ public interface MessariService {
     
     public String getAllStr();
     
-    public String getCache();
+    public String getCache() throws IOException;
 
 }
