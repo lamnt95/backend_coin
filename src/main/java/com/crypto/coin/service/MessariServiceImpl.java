@@ -179,6 +179,13 @@ public class MessariServiceImpl implements MessariService {
     public List<Post2> getAll2() {
         log.info("call db");
         List<Post2> ps =  postRepo.getAll4();
+        ps.forEach(psit -> {
+            if(psit.getA() != null && ( psit.getA().equals("ENTERPRISE_RESEARCH") ||  psit.getA().equals("PRO_RESEARCH")   ) ){
+                psit.setA("1");
+            }else{
+                psit.setA(null);
+            }
+        });
         return ps;
     }
     
