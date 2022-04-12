@@ -80,6 +80,7 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
+    @CacheEvict(value="coindb", allEntries=true)
     public void fetch(Long limit) throws IOException {
         List<Post> ents = new ArrayList<>();
 
@@ -170,6 +171,7 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
+    @Cacheable(value = "coindb")
     public List<Post2> getAll2() {
         List<Post2> ps =  postRepo.getAll4();
         return ps;
