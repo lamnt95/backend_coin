@@ -6,6 +6,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
+import java.util.Arrays;
 
 @Configuration
 @EnableCaching
