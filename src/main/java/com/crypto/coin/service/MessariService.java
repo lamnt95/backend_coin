@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface MessariService {
-    public void fetch(Long limit) throws IOException;
+    public List<Post2> fetch(Long limit) throws IOException;
 
     public Post getOne(Integer id);
 
