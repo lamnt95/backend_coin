@@ -11,6 +11,8 @@ public interface MessariService {
     public List<Post2> fetch(Long limit) throws IOException;
 
     public Post getOne(Integer id);
+    
+    public Post create(Post req);
 
     public List<Post> getAll();
 
