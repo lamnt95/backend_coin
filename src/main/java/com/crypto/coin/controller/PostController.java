@@ -63,6 +63,14 @@ public class PostController {
     ) throws IOException {
         return messariService.getAll2();
     }
+	
+    @GetMapping(value = "/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private Post create(
+	    @RequestBody Post req
+    ) throws IOException {
+        return messariService.create(req);
+    }
     
     @GetMapping(value = "/getCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
