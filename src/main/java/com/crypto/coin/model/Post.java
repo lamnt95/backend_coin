@@ -45,6 +45,9 @@ public class Post implements Serializable {
 
     @Column(name = "date")
     private String date;
+    
+    @Column(name = "doc_type")
+    private String docType;
 
     public Post(Integer id, String name, String source, String articleType, String slug, String srcId, String link, String date) {
         this.id = id;
