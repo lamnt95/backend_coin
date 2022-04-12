@@ -1,6 +1,8 @@
 package com.crypto.coin.service;
 
 import com.crypto.coin.model.Post;
+import com.crypto.coin.model.Post2;
+
 import com.crypto.coin.model.AggreCache;
 
 
@@ -168,8 +170,8 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
-    public List<Post> getAll2() {
-        List<Post> ps =  postRepo.getAll2();
+    public List<Post2> getAll2() {
+        List<Post2> ps =  postRepo.getAll4();
         return ps;
     }
     
