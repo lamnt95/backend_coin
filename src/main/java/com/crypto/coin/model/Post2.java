@@ -25,11 +25,11 @@ public class Post2 implements Serializable {
         this.a = articleType;
     }
     
-    public Post2(Integer id, String name, String articleType, String date, String s) {
+    public Post2(Integer id, String name, String articleType, String date, String source) {
         this.i = id;
         this.n = name;
         this.d = date;
         this.a = articleType;
-        this.s = s;
+        this.s = source;
     }
 }
