@@ -2,6 +2,7 @@ package com.crypto.coin.controller;
 
 
 import com.crypto.coin.model.Post;
+import com.crypto.coin.model.Post2;
 import com.crypto.coin.model.AggreCache;
 
 import com.crypto.coin.repository.PostRepo;
@@ -58,7 +59,7 @@ public class PostController {
 
     @GetMapping(value = "/getAll2", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    private List<Post> getAll2(
+    private List<Post2> getAll2(
     ) throws IOException {
         return messariService.getAll2();
     }
