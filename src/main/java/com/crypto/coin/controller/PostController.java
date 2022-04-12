@@ -71,6 +71,14 @@ public class PostController {
     ) throws IOException {
         return messariService.create(req);
     }
+	
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private Post update(
+	    @RequestBody Post req
+    ) throws IOException {
+        return messariService.create(req);
+    }
     
     @GetMapping(value = "/getCache", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
