@@ -230,7 +230,7 @@ public class MessariServiceImpl implements MessariService {
     @Override
     @Transactional
     public Post create(Post req){
-        postRepo.saveAndFlush(req);
+        return postRepo.saveAndFlush(req);
     }
 
 }
