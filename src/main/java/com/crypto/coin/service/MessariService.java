@@ -1,6 +1,7 @@
 package com.crypto.coin.service;
 
 import com.crypto.coin.model.Post;
+import com.crypto.coin.model.Post2;
 import com.crypto.coin.model.AggreCache;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ public interface MessariService {
     public List<Post> getAll();
 
     public List<Post> getAll2();
+    public List<Post2> getAll2();
 
     public String getAllStr();
     
