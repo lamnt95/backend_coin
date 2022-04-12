@@ -8,6 +8,8 @@ import com.crypto.coin.model.AggreCache;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.CacheEvict;
+
 import com.crypto.coin.repository.PostRepo;
 import com.crypto.coin.repository.AggreCacheRepository;
 
@@ -228,6 +230,7 @@ public class MessariServiceImpl implements MessariService {
     }
     
     @Override
+    @CacheEvict(value = "coincache", allEntries = true)
     @Transactional
     public Post create(Post req){
         return postRepo.saveAndFlush(req);
