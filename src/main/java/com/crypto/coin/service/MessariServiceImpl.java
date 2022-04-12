@@ -226,4 +226,11 @@ public class MessariServiceImpl implements MessariService {
             return newCached;
         } 
     }
+    
+    @Override
+    @Transactional
+    public Post create(Post req){
+        postRepo.saveAndFlush(req);
+    }
+
 }
