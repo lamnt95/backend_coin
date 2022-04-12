@@ -57,11 +57,10 @@ public class Post implements Serializable {
         this.date = date;
     }
     
-     public Post(Integer id, String name,String articleType, String link, String date) {
+     public Post(Integer id, String name, String articleType, String date) {
         this.id = id;
         this.name = name;
         this.articleType = articleType;
-        this.link = link;
         this.date = date;
     }
 }
