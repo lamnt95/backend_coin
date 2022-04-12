@@ -177,6 +177,7 @@ public class MessariServiceImpl implements MessariService {
     @Override
     @Cacheable(value = "coincache")
     public List<Post2> getAll2() {
+        log.info("call db");
         List<Post2> ps =  postRepo.getAll4();
         return ps;
     }
