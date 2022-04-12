@@ -11,15 +11,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Post2 implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer id;
-    private String name;
-    private String articleType;
-    private String date;
+    private Integer i;
+    private String n;
+    private String a;
+    private String d;
 
      public Post2(Integer id, String name, String articleType, String date) {
-        this.id = id;
-        this.name = name;
-        this.articleType = articleType;
-        this.date = date;
+        this.i = id;
+        this.n = name;
+        this.a = articleType;
+        this.d = date;
     }
 }
