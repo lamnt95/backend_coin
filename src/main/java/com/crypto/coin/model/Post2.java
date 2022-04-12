@@ -22,7 +22,7 @@ public class Post2 implements Serializable {
         this.i = id;
         this.n = name;
         this.d = date;
-         log.info(articleType)
+        log.info(articleType);
         if(articleType!=null && ( articleType.equals("ENTERPRISE_RESEARCH") || articleType.equals("PRO_RESEARCH") )){
             this.a= 1L;
         }
