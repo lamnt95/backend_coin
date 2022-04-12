@@ -13,7 +13,7 @@ public class Post2 implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer i;
     private String n;
-    private String a;
+    private Long a;
     private String d;
 
      public Post2(Integer id, String name, String articleType, String date) {
@@ -21,7 +21,7 @@ public class Post2 implements Serializable {
         this.n = name;
         this.d = date;
         if(articleType!=null && ( articleType.equals("ENTERPRISE_RESEARCH") || articleType.equals("PRO_RESEARCH") )){
-            this.a="PRO";
+            this.a= 1L;
         }
     }
 }
