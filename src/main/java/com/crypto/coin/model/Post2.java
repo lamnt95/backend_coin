@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 @Data
 @NoArgsConstructor
 public class Post2 implements Serializable {
@@ -22,9 +21,6 @@ public class Post2 implements Serializable {
         this.i = id;
         this.n = name;
         this.d = date;
-        log.info(articleType);
-        if(articleType!=null && ( articleType.equals("ENTERPRISE_RESEARCH") || articleType.equals("PRO_RESEARCH") )){
-            this.a= 1L;
-        }
+        this.a = articleType;
     }
 }
