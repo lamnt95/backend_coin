@@ -19,7 +19,9 @@ public class Post2 implements Serializable {
      public Post2(Integer id, String name, String articleType, String date) {
         this.i = id;
         this.n = name;
-        this.a = articleType;
         this.d = date;
+        if(articleType!=null && ( articleType=="ENTERPRISE_RESEARCH" || articleType=="PRO_RESEARCH")){
+            this.a="PRO";
+        }
     }
 }
