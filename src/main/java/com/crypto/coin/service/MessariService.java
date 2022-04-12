@@ -14,7 +14,6 @@ public interface MessariService {
 
     public List<Post> getAll();
 
-    public List<Post> getAll2();
     public List<Post2> getAll2();
 
     public String getAllStr();
