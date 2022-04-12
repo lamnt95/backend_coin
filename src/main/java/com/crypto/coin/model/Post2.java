@@ -20,7 +20,7 @@ public class Post2 implements Serializable {
         this.i = id;
         this.n = name;
         this.d = date;
-        if(articleType!=null && ( articleType=="ENTERPRISE_RESEARCH" || articleType=="PRO_RESEARCH")){
+        if(articleType!=null && ( articleType.equals("ENTERPRISE_RESEARCH") || articleType.equals("PRO_RESEARCH") )){
             this.a="PRO";
         }
     }
