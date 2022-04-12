@@ -14,7 +14,7 @@ public class Post2 implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer i;
     private String n;
-    private Long a;
+    private String a;
     private String d;
 
      public Post2(Integer id, String name, String articleType, String date) {
