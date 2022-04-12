@@ -36,10 +36,10 @@ public class PostController {
 
     @GetMapping(value = "/fetchMessari", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    private void fetchMessari(
+    private List<Post2> fetchMessari(
             @RequestParam(name = "limit") Long limit
     ) throws IOException {
-        messariService.fetch(limit);
+        return messariService.fetch(limit);
     }
 
     @GetMapping(value = "/getAll", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
