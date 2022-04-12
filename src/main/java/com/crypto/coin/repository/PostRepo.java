@@ -2,6 +2,7 @@ package com.crypto.coin.repository;
 
 import com.crypto.coin.model.Cate;
 import com.crypto.coin.model.Post;
+import com.crypto.coin.model.Post2;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -23,4 +24,7 @@ public interface PostRepo extends JpaRepository<Post, Long> {
     
     @Query("select new com.crypto.coin.model.Post(a.id, a.name, a.articleType, a.date) from Post a ")
     List<Post> getAll2();
+    
+    @Query("select new com.crypto.coin.model.Post2(a.id, a.name, a.articleType, a.date) from Post a ")
+    List<Post2> getAll4();
 }
