@@ -64,7 +64,7 @@ public class PostController {
         return messariService.getAll2();
     }
 	
-    @GetMapping(value = "/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     private Post create(
 	    @RequestBody Post req
