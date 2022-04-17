@@ -67,6 +67,7 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    @Transient
+    @Column(name = "cate_str")
     private String cateStr;
+    
 }
