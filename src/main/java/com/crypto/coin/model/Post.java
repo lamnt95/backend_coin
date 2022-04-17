@@ -66,4 +66,7 @@ public class Post implements Serializable {
         this.articleType = articleType;
         this.date = date;
     }
+
+    @Transient
+    private String cateStr;
 }
