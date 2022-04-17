@@ -1,6 +1,7 @@
 package com.crypto.coin.controller;
 
 
+import com.crypto.coin.model.Cate;
 import com.crypto.coin.model.Post;
 import com.crypto.coin.model.Post2;
 import com.crypto.coin.model.AggreCache;
@@ -99,6 +100,13 @@ public class PostController {
     private String getAllStr(
     ) throws IOException {
         return messariService.getAllStr();
+    }
+
+    @GetMapping(value = "/getAllCate", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    private List<Cate> getAllCate(
+    ) throws IOException {
+        return messariService.getAllCate();
     }
 
 }

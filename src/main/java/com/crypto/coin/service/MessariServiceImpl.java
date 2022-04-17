@@ -1,11 +1,13 @@
 package com.crypto.coin.service;
 
+import com.crypto.coin.model.Cate;
 import com.crypto.coin.model.Post;
 import com.crypto.coin.model.Post2;
 
 import com.crypto.coin.model.AggreCache;
 
 
+import com.crypto.coin.repository.CateRepo;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.CacheEvict;
@@ -35,7 +37,10 @@ public class MessariServiceImpl implements MessariService {
 
     @Autowired
     private PostRepo postRepo;
-    
+
+    @Autowired
+    private CateRepo cateRepo;
+
     @Autowired
     private AggreCacheRepository aggreCacheRepository;
 
@@ -84,7 +89,7 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
-    @CachePut(value="coincache")
+    @CachePut(value = "coincache")
     public List<Post2> fetch(Long limit) throws IOException {
         List<Post> ents = new ArrayList<>();
 
@@ -154,14 +159,14 @@ public class MessariServiceImpl implements MessariService {
                         } catch (Exception e) {
                             log.info("ERR");
                         }
-                    }else{
+                    } else {
                         log.info("Call api ERROR");
                     }
                 }
             }
             log.info("the end");
         }
-        List<Post2> ps4 =  postRepo.getAll4();
+        List<Post2> ps4 = postRepo.getAll4();
         return ps4;
     }
 
@@ -172,67 +177,79 @@ public class MessariServiceImpl implements MessariService {
 
     @Override
     public List<Post> getAll() {
-        List<Post> ps =  postRepo.findAll();
+        List<Post> ps = postRepo.findAll();
         return ps;
+    }
+
+    @Override
+    public List<Cate> getAllCate() {
+        Iterable<Cate> res = cateRepo.findAll();
+        if (res != null) {
+            List<Cate> res2 = new ArrayList();
+            res.forEach(res2::add);
+            return res2;
+        }
+
+        return null;
     }
 
     @Override
     @Cacheable(value = "coincache")
     public List<Post2> getAll2() {
         log.info("call db");
-        List<Post2> ps =  postRepo.getAll4();
+        List<Post2> ps = postRepo.getAll4();
         ps.forEach(psit -> {
-            if(psit.getA() != null && ( psit.getA().equals("ENTERPRISE_RESEARCH") ||  psit.getA().equals("PRO_RESEARCH")   ) ){
+            if (psit.getA() != null && (psit.getA().equals("ENTERPRISE_RESEARCH") || psit.getA().equals("PRO_RESEARCH"))) {
                 psit.setA("1");
-            }else{
+            } else {
                 psit.setA(null);
             }
         });
         return ps;
     }
-    
+
     @Override
     public String getAllStr() {
-        List<Post> ps =  postRepo.findAll();
+        List<Post> ps = postRepo.findAll();
         Gson gson = new Gson();
         String json = gson.toJson(ps);
         return json;
     }
-    
+
     @Override
-    public AggreCache getCache() throws IOException{
+    public AggreCache getCache() throws IOException {
         List<AggreCache> cacheExist = aggreCacheRepository.getCache();
-        if(cacheExist!=null && cacheExist.size() > 0){
+        if (cacheExist != null && cacheExist.size() > 0) {
             log.info("have cache");
             return cacheExist.get(0);
         }
         log.info("new cache");
         return null;
     }
-    
+
     @Override
-    public AggreCache setCache() throws IOException{
+    public AggreCache setCache() throws IOException {
         String cache = getAllStr();
         List<AggreCache> cacheExist = aggreCacheRepository.getCache();
-        if(cacheExist != null && cacheExist.size() > 0){
+        if (cacheExist != null && cacheExist.size() > 0) {
             log.info("have cache");
             AggreCache it = cacheExist.get(0);
             it.setData(cache);
             aggreCacheRepository.save(it);
             return it;
-        }else{
+        } else {
             log.info("new cache");
             AggreCache newCache = new AggreCache();
             newCache.setData(cache);
             AggreCache newCached = aggreCacheRepository.save(newCache);
             return newCached;
-        } 
+        }
     }
-    
+
     @Override
     @CacheEvict(value = "coincache", allEntries = true)
     @Transactional
-    public Post create(Post req){
+    public Post create(Post req) {
         return postRepo.saveAndFlush(req);
     }
 

@@ -1,5 +1,6 @@
 package com.crypto.coin.service;
 
+import com.crypto.coin.model.Cate;
 import com.crypto.coin.model.Post;
 import com.crypto.coin.model.Post2;
 import com.crypto.coin.model.AggreCache;
@@ -15,6 +16,9 @@ public interface MessariService {
     public Post create(Post req);
 
     public List<Post> getAll();
+
+    public List<Cate> getAllCate();
+
 
     public List<Post2> getAll2();
 

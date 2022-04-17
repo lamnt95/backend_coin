@@ -14,10 +14,4 @@ public class Cate {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "parent_id")
-    private Long parentId;
-
-    @Column(name = "position")
-    private Long position;
 }
