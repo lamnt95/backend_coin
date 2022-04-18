@@ -89,7 +89,6 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
-    @CachePut(value = "coincache")
     public List<Post2> fetch(Long limit) throws IOException {
         List<Post> ents = new ArrayList<>();
 
@@ -166,8 +165,8 @@ public class MessariServiceImpl implements MessariService {
             }
             log.info("the end");
         }
-        List<Post2> ps4 = postRepo.getAll4();
-        return ps4;
+
+        return null;
     }
 
     @Override
@@ -194,7 +193,6 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
-    @Cacheable(value = "coincache")
     public List<Post2> getAll2() {
         log.info("call db");
         List<Post2> ps = postRepo.getAll4();
@@ -247,7 +245,6 @@ public class MessariServiceImpl implements MessariService {
     }
 
     @Override
-    @CacheEvict(value = "coincache", allEntries = true)
     @Transactional
     public Post create(Post req) {
         return postRepo.saveAndFlush(req);

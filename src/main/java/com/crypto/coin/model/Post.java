@@ -69,5 +69,5 @@ public class Post implements Serializable {
 
     @Column(name = "cate_str")
     private String cateStr;
-    
+
 }
