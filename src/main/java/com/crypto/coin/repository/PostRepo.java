@@ -25,6 +25,6 @@ public interface PostRepo extends JpaRepository<Post, Long> {
     @Query("select new com.crypto.coin.model.Post(a.id, a.name, a.articleType, a.date) from Post a ")
     List<Post> getAll2();
     
-    @Query("select new com.crypto.coin.model.Post2(a.id, a.name, a.articleType, a.date, a.source) from Post a ")
+    @Query("select new com.crypto.coin.model.Post2(a.id, a.name, a.articleType, a.date, a.source, a.cateStr) from Post a ")
     List<Post2> getAll4();
 }
